@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smtp-lanathome-org-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: smtp-lanathome-org-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: smtp-lanathome-org-app
+    spec:
+      allowPrivilegedContainer: true
+      containers:
+      - name: smtp-lanathome-org-app
+        image: catatnight/postfix:latest
+        env:
+          - name: maildomain
+            value: smtp.lanathome.org
+          - name: smtp_user
+            value: asdf1234:qwer6789
+        ports:
+        - containerPort: 25
